@@ -1,6 +1,6 @@
 FROM php:7.1-cli
 
-MAINTAINER Mickael VILLERS <mickael.villers@epitech.eu>
+MAINTAINER Utkarsh Vishnoi <utkarshvishnoi25@gmail.com>
 
 # Set correct environment variables.
 ENV DEBIAN_FRONTEND=noninteractive
@@ -84,6 +84,13 @@ RUN apt-get update \
   && curl -sS https://getcomposer.org/installer | php \
   && mv composer.phar /usr/bin/composer \
   && composer selfupdate \
+  
+  # Go installation
+  && curl -O https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz \
+  && tar xvf go1.14.2.linux-amd64.tar.gz \
+  && chown -R root:root ./go \
+  && mv go /usr/local \
+  && echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> ~/.profile \
 
   # Add fingerprints for common sites.
   && mkdir ~/.ssh \
